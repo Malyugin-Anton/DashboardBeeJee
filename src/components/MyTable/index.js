@@ -1,7 +1,5 @@
-import React from 'react';
-import {
-  connect
-} from 'react-redux'
+import React from 'react'
+
 import {
   Table,
   Icon,
@@ -36,21 +34,8 @@ const columns = [{
   ),
 }];
 
-const App = ({
-    tasks
-  }) => {
-  return (
-    <div className="app">
-      <Table pagination={{ pageSize: 3 }} columns={columns} dataSource={tasks} />
-    </div>
-  )
+const MyTable = ({tasks}) => {
+  return <Table pagination={{ pageSize: 3 }} columns={columns} dataSource={tasks} />
 }
 
-export default connect(
-  state => ({
-    tasks: state.tasks
-  }),
-  null
-)(App)
-
-// export default App;
+export default MyTable

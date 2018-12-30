@@ -6,7 +6,7 @@ import {
 
 import * as serviceWorker from './serviceWorker';
 
-import App from './App';
+import App from './components/App';
 
 import 'antd/dist/antd.css';
 import './index.css';
