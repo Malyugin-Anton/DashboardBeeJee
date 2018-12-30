@@ -11,3 +11,17 @@
   text-align: center;
   margin-top: 20px;
 }
+
+.sort-panel {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sort-panel__sort span {
+  margin-right: 20px;
+}
+
+.sort-panel__direction span {
+  margin-right: 20px;
+}

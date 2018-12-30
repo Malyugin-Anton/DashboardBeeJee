@@ -10,6 +10,7 @@ import {
 import MyTable from '../MyTable'
 import MyPagination from '../MyPagination'
 import Loader from '../Loader'
+import SortPanel from '../SortPanel'
 
 class App extends React.Component {
 
@@ -25,6 +26,7 @@ class App extends React.Component {
         (this.props.data.length !== 0)
           ? (
             <div>
+              <SortPanel />
               <MyTable tasks={this.props.data.message.tasks} />
               <MyPagination handlePage={this.handlePage} totalCount={this.props.data.message.total_task_count}/ >
             </div>
