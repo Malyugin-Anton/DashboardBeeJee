@@ -4,15 +4,13 @@ import {
   Pagination
 } from 'antd'
 
-const MyPagination = ({totalCount}) => {
+const MyPagination = ({totalCount, handlePage}) => {
 
-  const onChange = (page) => {
-    console.log(page);
-  }
+  
 
   return (
     <div className="myPagination">
-      <Pagination onChange={onChange} pageSize={3} defaultCurrent={1} total={+totalCount} />
+      <Pagination onChange={(page) => handlePage(page)} pageSize={3} defaultCurrent={1} total={+totalCount} />
     </div>
   )
 }

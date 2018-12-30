@@ -12,8 +12,7 @@ import 'antd/dist/antd.css';
 import './index.css';
 
 import {
-  fetchTasks,
-  fetchTasksByPage
+  fetchTasks
 } from './store/actions.js'
 
 import store from './store';

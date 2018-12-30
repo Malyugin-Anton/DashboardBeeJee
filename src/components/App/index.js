@@ -3,11 +3,19 @@ import {
   connect
 } from 'react-redux'
 
+import {
+  fetchTasksByPage
+} from '../../store/actions.js'
+
 import MyTable from '../MyTable'
 import MyPagination from '../MyPagination'
 import Loader from '../Loader'
 
 class App extends React.Component {
+
+  handlePage = (page) => {
+    this.props.onPage(page)
+  }
 
   render() {
 
@@ -18,7 +26,7 @@ class App extends React.Component {
           ? (
             <div>
               <MyTable tasks={this.props.data.message.tasks} />
-              <MyPagination totalCount={this.props.data.message.total_task_count}/ >
+              <MyPagination handlePage={this.handlePage} totalCount={this.props.data.message.total_task_count}/ >
             </div>
           )
           : <Loader />
@@ -32,7 +40,13 @@ export default connect(
   state => ({
     data: state.data
   }),
-  null
+  dispatch => ({
+    onPage(page) {
+      dispatch(fetchTasksByPage(page))
+    }
+  })
 )(App)
+
+// fetchTasksByPage
 
 // export default App;
