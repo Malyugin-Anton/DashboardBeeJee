@@ -5,21 +5,19 @@ import {
 
 import MyTable from '../MyTable'
 
-import { Spin, Icon } from 'antd';
+class App extends React.Component {
 
-const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
-
-const App = ({data}) => {
-
-  console.log('data -- ', data);
-
-  return (
-      data.lenght
-      ? <div className="app">
-          <MyTable tasks={data} />
-        </div>
-      : <Spin indicator={antIcon} />
+  render() {
+    return(
+      <div className="app">
+      {
+        (this.props.data.length !== 0)
+          ? <MyTable tasks={this.props.data.message.tasks} />
+          : <h1>Loading...</h1>
+      }
+      </div>
     )
+  }
 }
 
 export default connect(

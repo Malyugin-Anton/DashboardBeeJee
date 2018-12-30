@@ -9,8 +9,6 @@ import {
   taskReducer
 } from './reducers'
 
-
-
 const store = createStore(
   combineReducers({
     data: taskReducer
