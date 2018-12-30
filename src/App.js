@@ -1,13 +1,22 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import {
-  DatePicker
-} from 'antd';
+  connect
+} from 'react-redux'
 
-class App extends Component {
-  render() {
-    return <DatePicker / >;
-  }
+const App = ({
+    tasks
+  }) => {
+  console.log(tasks);
+  return (
+    <h1> Start </h1>
+  )
 }
 
-export default App;
+export default connect(
+  state => ({
+    tasks: state.tasks
+  }),
+  null
+)(App)
+
+// export default App;
