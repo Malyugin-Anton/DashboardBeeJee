@@ -35,7 +35,7 @@ const columns = [{
 }];
 
 const MyTable = ({tasks}) => {
-  return <Table pagination={{ pageSize: 3 }} columns={columns} dataSource={tasks} />
+  return <Table rowKey="id" pagination={false} columns={columns} dataSource={tasks} />
 }
 
 export default MyTable

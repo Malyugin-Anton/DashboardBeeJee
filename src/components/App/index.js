@@ -4,16 +4,24 @@ import {
 } from 'react-redux'
 
 import MyTable from '../MyTable'
+import MyPagination from '../MyPagination'
+import Loader from '../Loader'
 
 class App extends React.Component {
 
   render() {
+
     return(
       <div className="app">
       {
         (this.props.data.length !== 0)
-          ? <MyTable tasks={this.props.data.message.tasks} />
-          : <h1>Loading...</h1>
+          ? (
+            <div>
+              <MyTable tasks={this.props.data.message.tasks} />
+              <MyPagination totalCount={this.props.data.message.total_task_count}/ >
+            </div>
+          )
+          : <Loader />
       }
       </div>
     )
