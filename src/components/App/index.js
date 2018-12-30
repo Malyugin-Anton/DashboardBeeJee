@@ -22,6 +22,10 @@ class App extends React.Component {
     this.props.onRequest(this.props.page, field, this.props.direction);
   }
 
+  handleDirection = (direction) => {
+    this.props.onRequest(this.props.page, this.props.field, direction);
+  }
+
   render() {
 
     return(
@@ -30,7 +34,7 @@ class App extends React.Component {
         (this.props.data.length !== 0)
           ? (
             <div>
-              <SortPanel handleSort={this.handleSort}/>
+              <SortPanel handleSort={this.handleSort} handleDirection={this.handleDirection}/>
               <MyTable tasks={this.props.data.message.tasks} />
               <MyPagination
                 handlePage={this.handlePage} 

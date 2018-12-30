@@ -11,10 +11,10 @@ import {
 const ButtonGroup = Button.Group;
 const Option = Select.Option;
 
-const SortPanel = ({handleSort}) => {
+const SortPanel = ({handleSort, handleDirection = f => f}) => {
 
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
+    handleDirection(value)
   }
 
   return (
@@ -40,8 +40,8 @@ const SortPanel = ({handleSort}) => {
       <div className="sort-panel__direction">
         <span>Sort direction: </span>
         <Select defaultValue="asc" style={{ width:100 }} onChange={handleChange}>
-          <Option value="jack">asc</Option>
-          <Option value="lucy">desc</Option>
+          <Option value="asc">asc</Option>
+          <Option value="desc">desc</Option>
         </Select>
       </div>
     </div>
