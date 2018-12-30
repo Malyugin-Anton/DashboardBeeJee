@@ -8,21 +8,21 @@ import thunk from 'redux-thunk'
 import {
   task,
   tasks,
-  bookReducer
+  taskReducer
 } from './reducers'
 
 import {
-  fetchBooks
+  fetchTasks
 } from './actions.js'
 
 const store = createStore(
   combineReducers({
-    bookReducer
+    taskReducer
   }),
   applyMiddleware(thunk)
 )
 
-store.dispatch(fetchBooks());
+store.dispatch(fetchTasks());
 
 console.log(store.getState());
 
