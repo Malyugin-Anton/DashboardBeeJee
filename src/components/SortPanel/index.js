@@ -11,7 +11,7 @@ import {
 const ButtonGroup = Button.Group;
 const Option = Select.Option;
 
-const SortPanel = () => {
+const SortPanel = ({handleSort}) => {
 
   const handleChange = (value) => {
     console.log(`selected ${value}`);
@@ -22,10 +22,18 @@ const SortPanel = () => {
       <div className="sort-panel__sort">
         <span>Sort by: </span>
         <ButtonGroup>
-          <Button>id</Button>
-          <Button>username</Button>
-          <Button>email</Button>
-          <Button>status</Button>
+          <Button onClick={() => handleSort('id')} >
+            id
+          </Button>
+          <Button onClick={() => handleSort('username')} >
+            username
+          </Button>
+          <Button onClick={() => handleSort('email')} >
+            email
+          </Button>
+          <Button onClick={() => handleSort('status')} >
+            status
+          </Button>
         </ButtonGroup>
       </div>
 

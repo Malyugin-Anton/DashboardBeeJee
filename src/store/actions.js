@@ -34,3 +34,15 @@ export const fetchTasksByPage = (page) => {
       })
   }
 }
+
+export const fetchTasksSort = (field, diredtion) => {
+  return (dispatch) => {
+    return Axios.get(apiUrl + '&sort_field=' + field)
+      .then(res => {
+        dispatch(fetchTasksSuccess(res.data))
+      })
+      .catch(e => {
+        throw (e)
+      })
+  }
+}

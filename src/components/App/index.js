@@ -4,7 +4,8 @@ import {
 } from 'react-redux'
 
 import {
-  fetchTasksByPage
+  fetchTasksByPage,
+  fetchTasksSort
 } from '../../store/actions.js'
 
 import MyTable from '../MyTable'
@@ -18,6 +19,10 @@ class App extends React.Component {
     this.props.onPage(page)
   }
 
+  handleSort = (field) => {
+    this.props.onSort(field)
+  }
+
   render() {
 
     return(
@@ -26,9 +31,11 @@ class App extends React.Component {
         (this.props.data.length !== 0)
           ? (
             <div>
-              <SortPanel />
+              <SortPanel handleSort={this.handleSort}/>
               <MyTable tasks={this.props.data.message.tasks} />
-              <MyPagination handlePage={this.handlePage} totalCount={this.props.data.message.total_task_count}/ >
+              <MyPagination
+                handlePage={this.handlePage} 
+                totalCount={this.props.data.message.total_task_count}/ >
             </div>
           )
           : <Loader />
@@ -45,6 +52,9 @@ export default connect(
   dispatch => ({
     onPage(page) {
       dispatch(fetchTasksByPage(page))
+    },
+    onSort(field) {
+      dispatch(fetchTasksSort(field))
     }
   })
 )(App)
