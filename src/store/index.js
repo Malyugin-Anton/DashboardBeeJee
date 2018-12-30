@@ -6,25 +6,17 @@ import {
 import thunk from 'redux-thunk'
 
 import {
-  task,
-  tasks,
   taskReducer
 } from './reducers'
 
-import {
-  fetchTasks
-} from './actions.js'
+
 
 const store = createStore(
   combineReducers({
-    taskReducer
+    data: taskReducer
   }),
   applyMiddleware(thunk)
 )
-
-store.dispatch(fetchTasks());
-
-console.log(store.getState());
 
 store.subscribe(
   () => console.log(store.getState())

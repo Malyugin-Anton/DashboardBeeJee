@@ -11,7 +11,13 @@ import App from './components/App';
 import 'antd/dist/antd.css';
 import './index.css';
 
+import {
+  fetchTasks
+} from './store/actions.js'
+
 import store from './store';
+
+store.dispatch(fetchTasks());
 
 ReactDOM.render(
   <Provider store={store}>
