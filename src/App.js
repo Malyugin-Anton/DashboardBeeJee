@@ -4,7 +4,6 @@ import {
 } from 'react-redux'
 import {
   Table,
-  Divider,
   Icon,
   Tag
 } from 'antd'
@@ -41,7 +40,9 @@ const App = ({
     tasks
   }) => {
   return (
-    <Table columns={columns} dataSource={tasks} />
+    <div className="app">
+      <Table pagination={{ pageSize: 3 }} columns={columns} dataSource={tasks} />
+    </div>
   )
 }
 
