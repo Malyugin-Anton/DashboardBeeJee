@@ -32,3 +32,13 @@ export const tasks = (state = [], action) => {
       return state
   }
 }
+
+// ./src/reducers/bookReducer.js
+export const bookReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'FETCH_BOOKS_SUCCESS':
+      return action.books;
+    default:
+      return state;
+  }
+};
