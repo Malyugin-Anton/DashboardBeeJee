@@ -4,8 +4,7 @@ import {
 } from 'react-redux'
 
 import {
-  fetchTasksByPage,
-  fetchTasksSort
+  fetchTasks
 } from '../../store/actions.js'
 
 import MyTable from '../MyTable'
@@ -16,11 +15,11 @@ import SortPanel from '../SortPanel'
 class App extends React.Component {
 
   handlePage = (page) => {
-    this.props.onPage(page)
+    this.props.onRequest(page, this.props.field, this.props.direction);
   }
 
   handleSort = (field) => {
-    this.props.onSort(field)
+    this.props.onRequest(this.props.page, field, this.props.direction);
   }
 
   render() {
@@ -47,14 +46,14 @@ class App extends React.Component {
 
 export default connect(
   state => ({
-    data: state.data
+    data: state.data,
+    page: state.page,
+    field: state.field,
+    direction: state.direction
   }),
   dispatch => ({
-    onPage(page) {
-      dispatch(fetchTasksByPage(page))
-    },
-    onSort(field) {
-      dispatch(fetchTasksSort(field))
+    onRequest(page, field, direction) {
+      dispatch(fetchTasks(page, field, direction))
     }
   })
 )(App)

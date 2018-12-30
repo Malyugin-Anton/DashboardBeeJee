@@ -6,12 +6,18 @@ import {
 import thunk from 'redux-thunk'
 
 import {
-  taskReducer
+  taskReducer,
+  pageReducer,
+  sortFieldReducer,
+  directionReducer
 } from './reducers'
 
 const store = createStore(
   combineReducers({
-    data: taskReducer
+    data: taskReducer,
+    page: pageReducer,
+    field: sortFieldReducer,
+    direction: directionReducer
   }),
   applyMiddleware(thunk)
 )

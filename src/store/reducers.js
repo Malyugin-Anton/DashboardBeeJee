@@ -6,3 +6,31 @@ export const taskReducer = (state = [], action) => {
       return state;
   }
 }
+
+export const pageReducer = (state = 1, action) => {
+  switch(action.type) {
+    case 'CHANGE_PAGE':
+      return action.page;
+    default:
+      return state;
+  }
+}
+
+export const sortFieldReducer = (state = 'id', action) => {
+  switch (action.type) {
+    case 'CHANGE_FIELD':
+      return action.field;
+    default:
+      return state;
+  }
+}
+
+export const directionReducer = (state = 'asc', action) => {
+  switch (action.type) {
+    case 'CHANGE_DIRECTION':
+      return action.direction;
+    default:
+      return state;
+  }
+}
+

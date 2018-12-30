@@ -11,35 +11,35 @@ export const fetchTasksSuccess = (tasks) => {
   }
 }
 
-export const fetchTasks = () => {
-  return (dispatch) => {
-    return Axios.get(apiUrl)
-      .then(res => {
-        dispatch(fetchTasksSuccess(res.data))
-      })
-      .catch(e => {
-        throw (e)
-      })
+export const changePage = (page) => {
+  return {
+    type: 'CHANGE_PAGE',
+    page
   }
 }
 
-export const fetchTasksByPage = (page) => {
-  return (dispatch) => {
-    return Axios.get(apiUrl + '&page=' + page)
-      .then(res => {
-        dispatch(fetchTasksSuccess(res.data))
-      })
-      .catch(e => {
-        throw (e)
-      })
+export const changeSortField = (field) => {
+  return {
+    type: 'CHANGE_FIELD',
+    field
   }
 }
 
-export const fetchTasksSort = (field, diredtion) => {
+export const changeDirection = (direction) => {
+  return {
+    type: 'CHANGE_DIRECTION',
+    direction
+  }
+}
+
+export const fetchTasks = (page = 1, field = 'id', direction = 'asc') => {
   return (dispatch) => {
-    return Axios.get(apiUrl + '&sort_field=' + field)
+    return Axios.get(`https://uxcandy.com/~shapoval/test-task-backend/?developer=Name&page=${page}&sort_field=${field}&sort_direction=${direction}`)
       .then(res => {
         dispatch(fetchTasksSuccess(res.data))
+        dispatch(changePage(page))
+        dispatch(changeSortField(field))
+        dispatch(changeDirection(direction))
       })
       .catch(e => {
         throw (e)
