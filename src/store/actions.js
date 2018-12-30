@@ -22,3 +22,15 @@ export const fetchTasks = () => {
       })
   }
 }
+
+export const fetchTasksByPage = (page) => {
+  return (dispatch) => {
+    return Axios.get(apiUrl + '&page=' + page)
+      .then(res => {
+        dispatch(fetchTasksSuccess(res.data))
+      })
+      .catch(e => {
+        throw (e)
+      })
+  }
+}
