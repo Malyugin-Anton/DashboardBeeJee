@@ -5,7 +5,7 @@ import {
 } from 'antd';
 
 const TopPanel = ({
-    showModal,
+    showModalLogin,
     login
   }) => {
 
@@ -13,7 +13,7 @@ const TopPanel = ({
     <div className="top-panel">
       {
         (!login) 
-        ? <Button type="primary" onClick={() => showModal()}>
+        ? <Button type="primary" onClick={() => showModalLogin()}>
             LOGIN
           </Button>
         : <Button icon="plus">

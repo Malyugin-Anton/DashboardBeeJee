@@ -17,7 +17,8 @@ import LoginModal from '../LoginModal'
 class App extends React.Component {
 
   state = {
-    visible: false
+    visibleLogin: false,
+    visibleAddTask: false
   }
 
   handlePage = (page) => {
@@ -37,25 +38,31 @@ class App extends React.Component {
       this.props.onLogin(true);
 
       this.setState({
-        visible: false
+        visibleLogin: false
       })
     }
   }
 
-  handleCancel = () => {
+  handleCancelLogin = () => {
     this.setState({
-      visible: false
+      visibleLogin: false
     })
   }
 
-  showModal = () => {
+  showModalLogin = () => {
     this.setState({
-      visible: true
+      visibleLogin: true
     })
+  }
+
+  handleAddTask = (username, email, text) => {
+    console.log(username);
+    console.log(email);
+    console.log(text);
   }
 
   render() {
-    const { visible } = this.state
+    const { visibleLogin, visibleAddTask } = this.state
 
     return(
       <div className="app">
@@ -63,7 +70,7 @@ class App extends React.Component {
         (this.props.data.length !== 0)
           ? (
             <div>
-              <TopPanel showModal={this.showModal} login={this.props.login}/>
+              <TopPanel showModalLogin={this.showModalLogin} login={this.props.login}/>
               <SortPanel 
                 handleSort={this.handleSort} 
                 handleDirection={this.handleDirection}
@@ -74,9 +81,9 @@ class App extends React.Component {
                 totalCount={this.props.data.message.total_task_count}
               />
               <LoginModal
-                visible={visible} 
+                visible={visibleLogin} 
                 handleLogin={this.handleLogin} 
-                handleCancel={this.handleCancel}
+                handleCancel={this.handleCancelLogin}
               />
             </div>
           )
