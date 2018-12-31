@@ -1,6 +1,12 @@
 import React from 'react'
 
-import { Modal, Button } from 'antd';
+import {
+  Modal,
+  Button,
+  Icon,
+  Input,
+  Form
+} from 'antd';
 
 const MyModal = ({
     visible,
@@ -8,34 +14,24 @@ const MyModal = ({
     handleCancel
   }) => {
 
-  // handleOk = (e) => {
-  //   console.log(e);
-  //   this.setState({
-  //     visible: false,
-  //   });
-  // }
-
-  // handleCancel = (e) => {
-  //   console.log(e);
-  //   this.setState({
-  //     visible: false,
-  //   });
-  // }
-
-  // onOk={this.handleOk}
-  // onCancel={this.handleCancel}
+  let _login, _password
 
   return (
     <div>
       <Modal
-        title="Basic Modal"
+        title="Login"
         visible={visible}
-        onOk={() => handleLogin()}
+        onOk={() => handleLogin(_login, _password)}
         onCancel={() => handleCancel()}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <Form layout = "vertical">
+          <Form.Item>
+            <Input onChange={(e) => _login = e.target.value} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+          </Form.Item>
+          <Form.Item>
+            <Input onChange={(e) => _password = e.target.value} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );

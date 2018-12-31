@@ -32,7 +32,7 @@ export const changeDirection = (direction) => {
   }
 }
 
-export const login = (login) => {
+export const loginUser = (login) => {
   return {
     type: 'LOGIN',
     login

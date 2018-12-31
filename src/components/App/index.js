@@ -4,7 +4,7 @@ import {
 } from 'react-redux'
 
 import {
-  fetchTasks, login
+  fetchTasks, loginUser
 } from '../../store/actions.js'
 
 import MyTable from '../MyTable'
@@ -32,10 +32,14 @@ class App extends React.Component {
     this.props.onRequest(this.props.page, this.props.field, direction);
   }
 
-  handleLogin = () => {
-    this.setState({
-      visible: false
-    })
+  handleLogin = (login, password) => {
+    if (login == 'admin' && password == '123') {
+      this.props.onLogin(true);
+
+      this.setState({
+        visible: false
+      })
+    }
   }
 
   handleCancel = () => {
@@ -94,6 +98,9 @@ export default connect(
   dispatch => ({
     onRequest(page, field, direction) {
       dispatch(fetchTasks(page, field, direction))
+    },
+    onLogin(login) {
+      dispatch(loginUser(login))
     }
   })
 )(App)
