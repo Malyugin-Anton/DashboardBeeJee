@@ -32,6 +32,13 @@ export const changeDirection = (direction) => {
   }
 }
 
+export const login = (login) => {
+  return {
+    type: 'LOGIN',
+    login
+  }
+}
+
 export const fetchTasks = (page = 1, field = 'id', direction = 'asc') => {
   return (dispatch) => {
     return Axios.get(`https://uxcandy.com/~shapoval/test-task-backend/?developer=Name&page=${page}&sort_field=${field}&sort_direction=${direction}`)

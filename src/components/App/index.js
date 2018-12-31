@@ -4,13 +4,14 @@ import {
 } from 'react-redux'
 
 import {
-  fetchTasks
+  fetchTasks, login
 } from '../../store/actions.js'
 
 import MyTable from '../MyTable'
 import MyPagination from '../MyPagination'
 import Loader from '../Loader'
 import SortPanel from '../SortPanel'
+import TopPanel from '../TopPanel'
 
 class App extends React.Component {
 
@@ -26,6 +27,10 @@ class App extends React.Component {
     this.props.onRequest(this.props.page, this.props.field, direction);
   }
 
+  handleLogin = () => {
+    console.log('LOGIN')
+  }
+
   render() {
 
     return(
@@ -34,6 +39,7 @@ class App extends React.Component {
         (this.props.data.length !== 0)
           ? (
             <div>
+              <TopPanel />
               <SortPanel handleSort={this.handleSort} handleDirection={this.handleDirection}/>
               <MyTable tasks={this.props.data.message.tasks} />
               <MyPagination
@@ -53,7 +59,8 @@ export default connect(
     data: state.data,
     page: state.page,
     field: state.field,
-    direction: state.direction
+    direction: state.direction,
+    login: state.login
   }),
   dispatch => ({
     onRequest(page, field, direction) {

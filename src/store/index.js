@@ -9,7 +9,8 @@ import {
   taskReducer,
   pageReducer,
   sortFieldReducer,
-  directionReducer
+  directionReducer,
+  loginReducer
 } from './reducers'
 
 const store = createStore(
@@ -17,7 +18,8 @@ const store = createStore(
     data: taskReducer,
     page: pageReducer,
     field: sortFieldReducer,
-    direction: directionReducer
+    direction: directionReducer,
+    login: loginReducer
   }),
   applyMiddleware(thunk)
 )
