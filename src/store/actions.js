@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 // API URL
-const apiUrl = 'https://uxcandy.com/~shapoval/test-task-backend/?developer=Name';
+// const apiUrl = 'https://uxcandy.com/~shapoval/test-task-backend/?developer=Name';
 
 // Sync Action
 export const fetchTasksSuccess = (tasks) => {

@@ -12,6 +12,10 @@
   margin-top: 20px;
 }
 
+.top-panel {
+  margin-bottom: 20px;
+}
+
 .sort-panel {
   margin-bottom: 20px;
   display: flex;

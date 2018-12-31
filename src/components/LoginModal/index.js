@@ -2,13 +2,12 @@ import React from 'react'
 
 import {
   Modal,
-  Button,
   Icon,
   Input,
   Form
 } from 'antd';
 
-const MyModal = ({
+const LoginModal = ({
     visible,
     handleLogin,
     handleCancel
@@ -37,4 +36,4 @@ const MyModal = ({
   );
 }
 
-export default MyModal;
+export default LoginModal;

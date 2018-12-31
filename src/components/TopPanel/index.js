@@ -5,14 +5,22 @@ import {
 } from 'antd';
 
 const TopPanel = ({
-    showModal
+    showModal,
+    login
   }) => {
 
   return (
     <div className="top-panel">
-      <Button type="primary" onClick={() => showModal()}>
-        LOGIN
-      </Button>
+      {
+        (!login) 
+        ? <Button type="primary" onClick={() => showModal()}>
+            LOGIN
+          </Button>
+        : <Button icon="plus">
+            add task
+          </Button>
+      }
+      
     </div>
   )
 

@@ -12,7 +12,7 @@ import MyPagination from '../MyPagination'
 import Loader from '../Loader'
 import SortPanel from '../SortPanel'
 import TopPanel from '../TopPanel'
-import MyModal from '../MyModal'
+import LoginModal from '../LoginModal'
 
 class App extends React.Component {
 
@@ -33,7 +33,7 @@ class App extends React.Component {
   }
 
   handleLogin = (login, password) => {
-    if (login == 'admin' && password == '123') {
+    if (login === 'admin' && password === '123') {
       this.props.onLogin(true);
 
       this.setState({
@@ -63,7 +63,7 @@ class App extends React.Component {
         (this.props.data.length !== 0)
           ? (
             <div>
-              <TopPanel showModal={this.showModal}/>
+              <TopPanel showModal={this.showModal} login={this.props.login}/>
               <SortPanel 
                 handleSort={this.handleSort} 
                 handleDirection={this.handleDirection}
@@ -73,7 +73,7 @@ class App extends React.Component {
                 handlePage={this.handlePage} 
                 totalCount={this.props.data.message.total_task_count}
               />
-              <MyModal 
+              <LoginModal
                 visible={visible} 
                 handleLogin={this.handleLogin} 
                 handleCancel={this.handleCancel}
