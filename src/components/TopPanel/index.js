@@ -6,6 +6,7 @@ import {
 
 const TopPanel = ({
     showModalLogin,
+    showModalAddTask,
     login
   }) => {
 
@@ -16,7 +17,7 @@ const TopPanel = ({
         ? <Button type="primary" onClick={() => showModalLogin()}>
             LOGIN
           </Button>
-        : <Button icon="plus">
+        : <Button icon="plus" onClick={() => showModalAddTask()}>
             add task
           </Button>
       }

@@ -7,9 +7,10 @@ import {
   Form
 } from 'antd';
 
-const NewTaskModal = ({
-  newTask,
-  handleAddTask
+const AddTaskModal = ({
+  visible,
+  handleAddTask,
+  handleCancel
 }) => {
   let _username, _email, _text
 
@@ -17,9 +18,9 @@ const NewTaskModal = ({
   return (
     <Modal
         title="Login"
-        visible={newTask}
+        visible={visible}
         onOk={() => handleAddTask(_username, _email, _text)}
-        // onCancel={() => handleCancel()}
+        onCancel={() => handleCancel()}
       >
         <Form layout = "vertical">
           <Form.Item>
@@ -36,4 +37,4 @@ const NewTaskModal = ({
   )
 }
 
-export default NewTaskModal;
+export default AddTaskModal;

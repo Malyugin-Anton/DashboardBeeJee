@@ -13,6 +13,7 @@ import Loader from '../Loader'
 import SortPanel from '../SortPanel'
 import TopPanel from '../TopPanel'
 import LoginModal from '../LoginModal'
+import AddTaskModal from '../AddTaskModal'
 
 class App extends React.Component {
 
@@ -55,10 +56,22 @@ class App extends React.Component {
     })
   }
 
+  showModalAddTask = () => {
+    this.setState({
+      visibleAddTask: true
+    })
+  }
+
   handleAddTask = (username, email, text) => {
     console.log(username);
     console.log(email);
     console.log(text);
+  }
+
+  handleCancelAddTask = () => {
+    this.setState({
+      visibleAddTask: false
+    })
   }
 
   render() {
@@ -70,7 +83,10 @@ class App extends React.Component {
         (this.props.data.length !== 0)
           ? (
             <div>
-              <TopPanel showModalLogin={this.showModalLogin} login={this.props.login}/>
+              <TopPanel 
+                showModalLogin={this.showModalLogin} 
+                showModalAddTask={this.showModalAddTask} 
+                login={this.props.login}/>
               <SortPanel 
                 handleSort={this.handleSort} 
                 handleDirection={this.handleDirection}
@@ -84,6 +100,11 @@ class App extends React.Component {
                 visible={visibleLogin} 
                 handleLogin={this.handleLogin} 
                 handleCancel={this.handleCancelLogin}
+              />
+              <AddTaskModal 
+                visible={visibleAddTask} 
+                handleAddTask={this.handleAddTask} 
+                handleCancel={this.handleCancelAddTask}
               />
             </div>
           )
