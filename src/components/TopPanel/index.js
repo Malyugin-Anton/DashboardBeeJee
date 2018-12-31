@@ -4,11 +4,13 @@ import {
   Button
 } from 'antd';
 
-const TopPanel = () => {
+const TopPanel = ({
+    showModal
+  }) => {
 
   return (
     <div className="top-panel">
-      <Button type="primary">
+      <Button type="primary" onClick={() => showModal()}>
         LOGIN
       </Button>
     </div>

@@ -12,8 +12,13 @@ import MyPagination from '../MyPagination'
 import Loader from '../Loader'
 import SortPanel from '../SortPanel'
 import TopPanel from '../TopPanel'
+import MyModal from '../MyModal'
 
 class App extends React.Component {
+
+  state = {
+    visible: false
+  }
 
   handlePage = (page) => {
     this.props.onRequest(page, this.props.field, this.props.direction);
@@ -28,10 +33,25 @@ class App extends React.Component {
   }
 
   handleLogin = () => {
-    console.log('LOGIN')
+    this.setState({
+      visible: false
+    })
+  }
+
+  handleCancel = () => {
+    this.setState({
+      visible: false
+    })
+  }
+
+  showModal = () => {
+    this.setState({
+      visible: true
+    })
   }
 
   render() {
+    const { visible } = this.state
 
     return(
       <div className="app">
@@ -39,12 +59,21 @@ class App extends React.Component {
         (this.props.data.length !== 0)
           ? (
             <div>
-              <TopPanel />
-              <SortPanel handleSort={this.handleSort} handleDirection={this.handleDirection}/>
+              <TopPanel showModal={this.showModal}/>
+              <SortPanel 
+                handleSort={this.handleSort} 
+                handleDirection={this.handleDirection}
+              />
               <MyTable tasks={this.props.data.message.tasks} />
               <MyPagination
                 handlePage={this.handlePage} 
-                totalCount={this.props.data.message.total_task_count}/ >
+                totalCount={this.props.data.message.total_task_count}
+              />
+              <MyModal 
+                visible={visible} 
+                handleLogin={this.handleLogin} 
+                handleCancel={this.handleCancel}
+              />
             </div>
           )
           : <Loader />
@@ -68,7 +97,3 @@ export default connect(
     }
   })
 )(App)
-
-// fetchTasksByPage
-
-// export default App;
