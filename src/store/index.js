@@ -10,12 +10,14 @@ import {
   pageReducer,
   sortFieldReducer,
   directionReducer,
-  loginReducer
+  loginReducer,
+  countReducer
 } from './reducers'
 
 const store = createStore(
   combineReducers({
     data: taskReducer,
+    count: countReducer,
     page: pageReducer,
     field: sortFieldReducer,
     direction: directionReducer,

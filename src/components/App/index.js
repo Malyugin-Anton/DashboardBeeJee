@@ -4,7 +4,7 @@ import {
 } from 'react-redux'
 
 import {
-  fetchTasks, loginUser
+  fetchTasks, loginUser, addNewTask
 } from '../../store/actions.js'
 
 import MyTable from '../MyTable'
@@ -63,9 +63,11 @@ class App extends React.Component {
   }
 
   handleAddTask = (username, email, text) => {
-    console.log(username);
-    console.log(email);
-    console.log(text);
+    this.props.onAddTask(username, email, text)
+
+    this.setState({
+      visibleAddTask: false
+    })
   }
 
   handleCancelAddTask = () => {
@@ -80,7 +82,7 @@ class App extends React.Component {
     return(
       <div className="app">
       {
-        (this.props.data.length !== 0)
+        (this.props.tasks.length !== 0)
           ? (
             <div>
               <TopPanel 
@@ -91,10 +93,10 @@ class App extends React.Component {
                 handleSort={this.handleSort} 
                 handleDirection={this.handleDirection}
               />
-              <MyTable tasks={this.props.data.message.tasks} />
+              <MyTable tasks={this.props.tasks} />
               <MyPagination
                 handlePage={this.handlePage} 
-                totalCount={this.props.data.message.total_task_count}
+                totalCount={this.props.count}
               />
               <LoginModal
                 visible={visibleLogin} 
@@ -117,7 +119,8 @@ class App extends React.Component {
 
 export default connect(
   state => ({
-    data: state.data,
+    tasks: state.data,
+    count: state.count,
     page: state.page,
     field: state.field,
     direction: state.direction,
@@ -129,6 +132,9 @@ export default connect(
     },
     onLogin(login) {
       dispatch(loginUser(login))
+    },
+    onAddTask(username, email, text) {
+      dispatch(addNewTask(username, email, text))
     }
   })
 )(App)
