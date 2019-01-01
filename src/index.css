@@ -29,3 +29,11 @@
 .sort-panel__direction span {
   margin-right: 20px;
 }
+
+.show {
+
+}
+
+.hide {
+  display: none;
+}

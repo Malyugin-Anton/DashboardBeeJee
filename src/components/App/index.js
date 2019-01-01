@@ -93,7 +93,10 @@ class App extends React.Component {
                 handleSort={this.handleSort} 
                 handleDirection={this.handleDirection}
               />
-              <MyTable tasks={this.props.tasks} />
+              <MyTable 
+                tasks={this.props.tasks} 
+                login={this.props.login}
+                />
               <MyPagination
                 handlePage={this.handlePage} 
                 totalCount={this.props.count}
