@@ -5,7 +5,6 @@ import {
   Icon,
   Tag,
   Input,
-  InputNumber,
   Button,
   Form,
   Switch
@@ -108,38 +107,17 @@ class MyTable extends React.Component {
         className: this.props.login ? "show" : "hide",
         render: (text, record, index) => {
           return this.state.edit
-            ? <Button onClick={() => this.handleSave()}>Save</Button>
+            ? (<EditableContext.Consumer>
+              {form => (
+                <Button onClick={() => this.handleSave(form, record.id)}> Save </Button>
+              )}
+            </EditableContext.Consumer>)
             : <Button onClick={() => this.handleEdit(record.id)}>Edit</Button>
         }
     }]
   }
 
   isEditing = record => record.id === this.state.editingKey;
-
-  cancel = () => {
-    this.setState({
-      editingKey: ''
-    });
-  };
-
-  save(form, key) {
-    form.validateFields((error, row) => {
-      if (error) {
-        return;
-      }
-    });
-  }
-
-  // {
-  //     title: 'action',
-  //     dataIndex: 'action',
-  //     className: this.props.login ? "show" : "hide",
-      // render: () => {
-      //   return this.state.edit 
-      //     ? <Button onClick={this.handleSave}>Save</Button>
-      //     : <Button onClick={this.handleEdit}>Edit</Button> 
-      // }
-  //   }
 
   handleEdit = (key) => {
     this.setState({
@@ -148,7 +126,28 @@ class MyTable extends React.Component {
     })
   }
 
-  handleSave = () => {
+  handleSave = (form, key) => {
+    console.log(' -- handleSave -- ')
+    let textEdit = '',
+        statusEdit = ''
+
+    form.validateFields((error, row) => {
+      textEdit = row.text;
+      statusEdit = row.status;
+    });
+
+    if (statusEdit) {
+      statusEdit = 10
+    } else {
+      statusEdit = 0
+    }
+
+    console.log('key -- ' + key)
+    console.log('textEdit -- ' + textEdit)
+    console.log('statusEdit -- ' + statusEdit)
+
+    // this.props.editTask()
+
     this.setState({
       edit: !this.state.edit,
       editingKey: ''
