@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import md5 from 'md5';
 
 // API URL
 const apiUrlPost = 'https://uxcandy.com/~shapoval/test-task-backend/create?developer=Name';
@@ -21,6 +22,13 @@ export const addTaskSuccess = (data) => {
       text: data.text,
       status: data.status
     }
+  }
+}
+
+export const editTaskSuccess = (data) => {
+  return {
+    type: 'ADD_TASK_SUCCESS',
+    data
   }
 }
 
@@ -91,5 +99,33 @@ export const addNewTask = (username, email, text) => {
         .catch(error => {
           throw (error);
         });
+  }
+}
+
+// Выпослинть url кодирвование параметров
+// После token должно быть последним
+// RFC 3986 (например, строка "example@example.com" кодируется в "example%40example.com")
+// (получится, например, status=0&text=SomeText&token=beejee)
+// рассчитать md5-хеш от URL-кодированной строки запроса (md5(params_string)) и отправить этот md5-хеш в поле 'signature' в POST вместе с другими параметрами
+
+export const editTask = (id, text, status) => {
+  let stringResponsive = `status=${status}&text=${text}&token=beejee`;
+
+  // Кодируем строку
+  let stringResponsiveEncode = encodeURIComponent(stringResponsive);
+
+  let data = new FormData();
+
+  data.set('signature', md5(stringResponsiveEncode));
+
+  return (dispatch) => {
+    return Axios.post(apiUrlPost + '/edit/:' + id, data)
+      .then(res => {
+        console.log(res.data);
+        dispatch(editTaskSuccess(res.data))
+      })
+      .catch(error => {
+        throw (error);
+      });
   }
 }

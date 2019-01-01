@@ -4,7 +4,9 @@ export const taskReducer = (state = [], action) => {
       return [
         ...state,
         action.payload
-      ]
+      ];
+    case 'EDIT_TASK_SUCCESS':
+      return state;
     case 'FETCH_TASKS_SUCCESS':
       return action.tasks;
     default:
