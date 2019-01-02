@@ -48,7 +48,7 @@ export const directionReducer = (state = 'asc', action) => {
   }
 }
 
-export const loginReducer = (state = true, action) => {
+export const loginReducer = (state = false, action) => {
   switch(action.type) {
     case 'LOGIN':
       return action.login;
