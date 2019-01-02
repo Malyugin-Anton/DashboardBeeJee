@@ -25,7 +25,7 @@ const EditableFormRow = Form.create()(EditableRow);
 class EditableCell extends React.Component {
   getInput = (record) => {
     if (this.props.dataIndex === 'status') {
-      return (record.status) ? <Switch /> : <Switch defaultChecked/>;
+      return (record.status === 0) ? <Switch /> : <Switch defaultChecked/>;
     }
     return <Input / > ;
   };
