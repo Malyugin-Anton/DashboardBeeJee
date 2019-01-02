@@ -4,7 +4,7 @@ import {
 } from 'react-redux'
 
 import {
-  fetchTasks, loginUser, addNewTask, editTask
+  fetchTasks, loginUser, addNewTask, editTask, logoutUser
 } from '../../store/actions.js'
 
 import MyTable from '../MyTable'
@@ -42,6 +42,10 @@ class App extends React.Component {
         visibleLogin: false
       })
     }
+  }
+
+  handleLogout = (login) => {
+    this.props.onLogout(login);
   }
 
   handleCancelLogin = () => {
@@ -96,6 +100,7 @@ class App extends React.Component {
               <TopPanel 
                 showModalLogin={this.showModalLogin} 
                 showModalAddTask={this.showModalAddTask} 
+                handleLogout={this.handleLogout}
                 login={this.props.login}/>
               <SortPanel 
                 handleSort={this.handleSort} 
@@ -144,6 +149,9 @@ export default connect(
     },
     onLogin(login) {
       dispatch(loginUser(login))
+    },
+    onLogout(login) {
+      dispatch(logoutUser(login))
     },
     onAddTask(username, email, text) {
       dispatch(addNewTask(username, email, text))

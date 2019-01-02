@@ -61,6 +61,13 @@ export const loginUser = (login) => {
   }
 }
 
+export const logoutUser = (login) => {
+  return {
+    type: 'LOGOUT',
+    login
+  }
+}
+
 export const fetchTasks = (page = 1, field = 'id', direction = 'asc') => {
   return (dispatch) => {
     return Axios.get(`https://uxcandy.com/~shapoval/test-task-backend/?developer=0xff&page=${page}&sort_field=${field}&sort_direction=${direction}`)
