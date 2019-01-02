@@ -2,7 +2,6 @@ import React from 'react'
 
 import {
   Modal,
-  Icon,
   Input,
   Form
 } from 'antd';
@@ -10,31 +9,69 @@ import {
 const AddTaskModal = ({
   visible,
   handleAddTask,
-  handleCancel
+  handleCancel,
+  form
 }) => {
-  let _username, _email, _text
 
+  const { getFieldDecorator, validateFieldsAndScroll } = form;
+
+  const handleOk = () => {
+    validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        handleAddTask(values.username, values.email, values.text)
+
+        form.resetFields()
+      } 
+    }) 
+  }
 
   return (
     <Modal
-        title="Login"
+        title="Add new task"
         visible={visible}
-        onOk={() => handleAddTask(_username, _email, _text)}
-        onCancel={() => handleCancel()}
+        onOk={() => handleOk()}
+        onCancel={() => {
+          handleCancel()
+          form.resetFields()
+        }}
       >
         <Form layout = "vertical">
           <Form.Item>
-            <Input onChange={(e) => _username = e.target.value} type="text" placeholder="Username" />
+            {getFieldDecorator('username', {
+                rules: [{
+                  required: true, message: 'Please input your username!',
+                }, {
+                  value: () => {if(!visible) return ''}
+                }],
+              })(
+                <Input type="text" placeholder="Username" />
+              )}
           </Form.Item>
           <Form.Item>
-            <Input onChange={(e) => _email = e.target.value} type="email" placeholder="Email" />
-          </Form.Item>
+              {getFieldDecorator('email', {
+                rules: [{
+                  type: 'email', message: 'The input is not valid E-mail!',
+                }, {
+                  required: true, message: 'Please input your E-mail!',
+                }],
+              })(
+                <Input type="email" placeholder="Email" />
+              )}
+            </Form.Item>
           <Form.Item>
-            <Input onChange={(e) => _text = e.target.value} type="text" placeholder="Text" />
+            {getFieldDecorator('text', {
+                rules: [{
+                  required: true, message: 'Please input your text!',
+                }],
+              })(
+                <Input type="text" placeholder="Text" />
+              )}
           </Form.Item>
         </Form>
       </Modal>
   )
 }
 
-export default AddTaskModal;
+const WrappedAddTaskModal = Form.create()(AddTaskModal);
+
+export default WrappedAddTaskModal;

@@ -72,8 +72,6 @@ class MyTable extends React.Component {
     edit: false,
 
     editingKey: '',
-
-    
   }
 
   isEditing = record => record.id === this.state.editingKey;
@@ -86,7 +84,6 @@ class MyTable extends React.Component {
   }
 
   handleSave = (form, key) => {
-    console.log(' -- handleSave -- ')
     let textEdit = '',
         statusEdit = ''
 
@@ -135,9 +132,11 @@ class MyTable extends React.Component {
       key: 'status',
       dataIndex: 'status',
       editable: true,
-      render: (status) => (
-        ( status ) ? <Icon type="question-circle" theme="twoTone" /> : <Icon type="check-circle" theme="twoTone" />
-      ),
+      render: (status) => {
+        return ((status === 0) 
+          ? <Icon type="question-circle" theme="twoTone" /> 
+          : <Icon type="check-circle" theme="twoTone" />)
+      },
     }, {
         title: 'action',
         dataIndex: 'action',
