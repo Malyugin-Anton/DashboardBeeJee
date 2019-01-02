@@ -73,7 +73,44 @@ class MyTable extends React.Component {
 
     editingKey: '',
 
-    columns: [{
+    
+  }
+
+  isEditing = record => record.id === this.state.editingKey;
+
+  handleEdit = (key) => {
+    this.setState({
+      edit: !this.state.edit,
+      editingKey: key
+    })
+  }
+
+  handleSave = (form, key) => {
+    console.log(' -- handleSave -- ')
+    let textEdit = '',
+        statusEdit = ''
+
+    form.validateFields((error, row) => {
+      textEdit = row.text;
+      statusEdit = row.status;
+    });
+
+    if (statusEdit) {
+      statusEdit = 10
+    } else {
+      statusEdit = 0
+    }
+
+    this.props.handleEditTask(key, textEdit, statusEdit)
+
+    this.setState({
+      edit: !this.state.edit,
+      editingKey: ''
+    })
+  }
+
+  render() {
+    const columns = [{
       title: 'ID',
       dataIndex: 'id',
       key: 'id'
@@ -115,42 +152,7 @@ class MyTable extends React.Component {
             : <Button onClick={() => this.handleEdit(record.id)}>Edit</Button>
         }
     }]
-  }
 
-  isEditing = record => record.id === this.state.editingKey;
-
-  handleEdit = (key) => {
-    this.setState({
-      edit: !this.state.edit,
-      editingKey: key
-    })
-  }
-
-  handleSave = (form, key) => {
-    console.log(' -- handleSave -- ')
-    let textEdit = '',
-        statusEdit = ''
-
-    form.validateFields((error, row) => {
-      textEdit = row.text;
-      statusEdit = row.status;
-    });
-
-    if (statusEdit) {
-      statusEdit = 10
-    } else {
-      statusEdit = 0
-    }
-
-    this.props.handleEditTask(key, textEdit, statusEdit)
-
-    this.setState({
-      edit: !this.state.edit,
-      editingKey: ''
-    })
-  }
-
-  render() {
     const components = {
       body: {
         row: EditableFormRow,
@@ -161,7 +163,7 @@ class MyTable extends React.Component {
 
     // const { columns } = this.state
 
-    const columns = this.state.columns.map((col) => {
+    const columnsNew = columns.map((col) => {
       if (!col.editable) {
         return col;
       }
@@ -181,7 +183,7 @@ class MyTable extends React.Component {
       rowKey="id" 
       components={components}
       pagination={false} 
-      columns={columns} 
+      columns={columnsNew} 
       dataSource={this.props.tasks} />
   }
 }

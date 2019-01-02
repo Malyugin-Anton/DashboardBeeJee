@@ -35,12 +35,16 @@ class App extends React.Component {
   }
 
   handleLogin = (login, password) => {
+    console.log(login)
+    console.log(password)
     if (login === 'admin' && password === '123') {
       this.props.onLogin(true);
 
       this.setState({
         visibleLogin: false
       })
+    } else {
+      this.props.onLogin(false);
     }
   }
 
