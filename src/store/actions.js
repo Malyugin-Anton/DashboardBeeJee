@@ -1,8 +1,9 @@
 import Axios from 'axios';
 import md5 from 'md5';
+import strictUriEncode from 'strict-uri-encode';
 
 // API URL
-const apiUrlPost = 'https://uxcandy.com/~shapoval/test-task-backend/create?developer=Name';
+const apiUrlPost = 'https://uxcandy.com/~shapoval/test-task-backend/create?developer=0xff';
 
 // Sync Action
 export const fetchTasksSuccess = (tasks) => {
@@ -22,13 +23,6 @@ export const addTaskSuccess = (data) => {
       text: data.text,
       status: data.status
     }
-  }
-}
-
-export const editTaskSuccess = (data) => {
-  return {
-    type: 'ADD_TASK_SUCCESS',
-    data
   }
 }
 
@@ -69,7 +63,7 @@ export const loginUser = (login) => {
 
 export const fetchTasks = (page = 1, field = 'id', direction = 'asc') => {
   return (dispatch) => {
-    return Axios.get(`https://uxcandy.com/~shapoval/test-task-backend/?developer=Name&page=${page}&sort_field=${field}&sort_direction=${direction}`)
+    return Axios.get(`https://uxcandy.com/~shapoval/test-task-backend/?developer=0xff&page=${page}&sort_field=${field}&sort_direction=${direction}`)
       .then(res => {
         dispatch(fetchTasksSuccess(res.data.message.tasks))
         dispatch(addTaskSuccessCount(res.data.message.total_task_count))
@@ -93,7 +87,6 @@ export const addNewTask = (username, email, text) => {
   return (dispatch) => {
     return Axios.post(apiUrlPost, data)
         .then(res => {
-          console.log(res.data.message);
           dispatch(addTaskSuccess(res.data.message))
         })
         .catch(error => {
@@ -109,20 +102,24 @@ export const addNewTask = (username, email, text) => {
 // рассчитать md5-хеш от URL-кодированной строки запроса (md5(params_string)) и отправить этот md5-хеш в поле 'signature' в POST вместе с другими параметрами
 
 export const editTask = (id, text, status) => {
-  let stringResponsive = `status=${status}&text=${text}&token=beejee`;
 
-  // Кодируем строку
-  let stringResponsiveEncode = encodeURIComponent(stringResponsive);
+  let urlEdit = `https://uxcandy.com/~shapoval/test-task-backend/edit/${id}?developer=0xff`;
+
+  let stringResponsive = `status=${strictUriEncode(status)}&text=${strictUriEncode(text)}&token=beejee`;
 
   let data = new FormData();
 
-  data.set('signature', md5(stringResponsiveEncode));
+  data.set('status', status);
+  data.set('text', text);
+  data.set('signature', md5(stringResponsive));
+  data.set('token', 'beejee');
+
 
   return (dispatch) => {
-    return Axios.post(apiUrlPost + '/edit/:' + id, data)
+    return Axios.post(urlEdit, data)
       .then(res => {
-        console.log(res.data);
-        dispatch(editTaskSuccess(res.data))
+        console.log(res.data)
+        // dispatch(fetchTasksSuccess(res.data))
       })
       .catch(error => {
         throw (error);

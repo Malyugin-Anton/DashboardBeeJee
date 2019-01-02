@@ -4,7 +4,7 @@ import {
 } from 'react-redux'
 
 import {
-  fetchTasks, loginUser, addNewTask
+  fetchTasks, loginUser, addNewTask, editTask
 } from '../../store/actions.js'
 
 import MyTable from '../MyTable'
@@ -76,6 +76,14 @@ class App extends React.Component {
     })
   }
 
+  handleEditTask = (id, text, status) => {
+    console.log(id)
+    console.log(text)
+    console.log(status)
+
+    this.props.onEditTask(id, text, status)
+  }
+
   render() {
     const { visibleLogin, visibleAddTask } = this.state
 
@@ -96,6 +104,7 @@ class App extends React.Component {
               <MyTable 
                 tasks={this.props.tasks} 
                 login={this.props.login}
+                handleEditTask={this.handleEditTask}
                 />
               <MyPagination
                 handlePage={this.handlePage} 
@@ -138,6 +147,9 @@ export default connect(
     },
     onAddTask(username, email, text) {
       dispatch(addNewTask(username, email, text))
+    },
+    onEditTask(id,text, status) {
+      dispatch(editTask(id, text, status))
     }
   })
 )(App)

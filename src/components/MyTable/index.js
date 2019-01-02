@@ -142,11 +142,7 @@ class MyTable extends React.Component {
       statusEdit = 0
     }
 
-    console.log('key -- ' + key)
-    console.log('textEdit -- ' + textEdit)
-    console.log('statusEdit -- ' + statusEdit)
-
-    // this.props.editTask()
+    this.props.handleEditTask(key, textEdit, statusEdit)
 
     this.setState({
       edit: !this.state.edit,
