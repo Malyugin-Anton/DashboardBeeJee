@@ -24,13 +24,13 @@ const AddTaskModal = ({
       >
         <Form layout = "vertical">
           <Form.Item>
-            <Input onChange={(e) => _username = e.target.value} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+            <Input onChange={(e) => _username = e.target.value} type="text" placeholder="Username" />
           </Form.Item>
           <Form.Item>
-            <Input onChange={(e) => _email = e.target.value} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
+            <Input onChange={(e) => _email = e.target.value} type="email" placeholder="Email" />
           </Form.Item>
           <Form.Item>
-            <Input onChange={(e) => _text = e.target.value} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="text" placeholder="Text task" />
+            <Input onChange={(e) => _text = e.target.value} type="text" placeholder="Text" />
           </Form.Item>
         </Form>
       </Modal>
