@@ -2,6 +2,7 @@
   "name": "beejee",
   "version": "0.1.0",
   "private": true,
+  "description": "Dashboard - test task for one employer",
   "dependencies": {
     "antd": "^3.11.6",
     "axios": "^0.18.0",
