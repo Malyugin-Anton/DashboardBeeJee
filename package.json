@@ -5,7 +5,7 @@
   "description": "Dashboard - test task for one employer",
   "dependencies": {
     "antd": "^3.11.6",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "md5": "^2.2.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
